@@ -1,6 +1,8 @@
 ﻿using API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Student = API.Domain_Models.Student;
+using Address = API.Domain_Models.Address;
+using Gender = API.Domain_Models.Gender;
 
 namespace API.Controllers
 {
@@ -33,6 +35,17 @@ namespace API.Controllers
                     Mobile = student.Mobile,
                     ProfileImageUrl = student.ProfileImageUrl,
                     GenderId = student.GenderId,
+                    Address = new Address()
+                    {
+                        Id = student.Address.Id,
+                        PhysicalAddress = student.Address.PhysicalAddress,
+                        PostalAddress = student.Address.PostalAddress,
+                    },
+                    Gender = new Gender()
+                    {
+                        Id = student.Gender.Id,
+                        Description = student.Gender.Description,
+                    }
                 });
             }
 

@@ -1,4 +1,5 @@
 ﻿using API.DataModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories
 {
@@ -13,7 +14,10 @@ namespace API.Repositories
 
         public List<Student> GetStudents()
         {
-            return context.Student.ToList();
+            return context.Student
+                .Include(nameof(Gender))
+                .Include(nameof(Address))
+                .ToList();
         }
     }
 }
