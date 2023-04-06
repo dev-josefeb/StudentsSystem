@@ -12,12 +12,12 @@ namespace API.Repositories
             this.context = context;
         }
 
-        public List<Student> GetStudents()
+        public async Task<List<Student>> GetStudentsAsync()
         {
-            return context.Student
+            return await context.Student
                 .Include(nameof(Gender))
                 .Include(nameof(Address))
-                .ToList();
+                .ToListAsync();
         }
     }
 }

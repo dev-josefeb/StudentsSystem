@@ -19,9 +19,9 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("[controller]")]
-        public IActionResult GetAllStudents()
+        public async Task<IActionResult> GetAllStudents()
         {
-            var students = studentRepository.GetStudents();
+            var students = await studentRepository.GetStudentsAsync();
             return Ok(mapper.Map<List<Student>>(students));
         }
     }
