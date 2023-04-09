@@ -52,8 +52,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { NavbarComponent } from './layout/navbar/navbar.component';
-import { StudentsComponent } from './students/students.component';
+import { NavbarComponent } from './components/layout/navbar/navbar.component';
+import { StudentsComponent } from './components/students/students.component';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, StudentsComponent],
