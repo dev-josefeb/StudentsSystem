@@ -53,9 +53,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { StudentsComponent } from './students/students.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent, StudentsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
