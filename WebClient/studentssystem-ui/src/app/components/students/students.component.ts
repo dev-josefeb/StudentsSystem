@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Student } from 'src/app/models/ui-models/student';
 import { StudentsService } from 'src/app/services/students.service';
@@ -23,6 +24,7 @@ export class StudentsComponent implements OnInit {
   ];
   dataSource: MatTableDataSource<Student> = new MatTableDataSource<Student>();
   @ViewChild(MatPaginator) matPaginator!: MatPaginator;
+  @ViewChild(MatSort) matSort!: MatSort;
 
   constructor(private studentsService: StudentsService) {}
 
@@ -35,6 +37,10 @@ export class StudentsComponent implements OnInit {
 
         if (this.matPaginator) {
           this.dataSource.paginator = this.matPaginator;
+        }
+
+        if (this.matSort) {
+          this.dataSource.sort = this.matSort;
         }
       },
       (errorResponse) => {
