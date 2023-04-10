@@ -57,9 +57,10 @@ import { NavbarComponent } from './components/layout/navbar/navbar.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ViewStudentComponent } from './components/view-student/view-student.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, StudentsComponent],
+  declarations: [AppComponent, NavbarComponent, StudentsComponent, ViewStudentComponent],
   imports: [
     BrowserModule,
     FormsModule,
