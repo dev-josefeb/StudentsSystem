@@ -19,5 +19,13 @@ namespace API.Repositories
                 .Include(nameof(Address))
                 .ToListAsync();
         }
+
+        public async Task<Student> GetStudentAsync(Guid id)
+        {
+            return await context.Student
+              .Include(nameof(Gender))
+              .Include(nameof(Address))
+              .FirstOrDefaultAsync(s => s.Id == id);
+        }
     }
 }
