@@ -22,9 +22,12 @@ export class StudentsComponent implements OnInit {
     'mobile',
     'gender',
   ];
+
   dataSource: MatTableDataSource<Student> = new MatTableDataSource<Student>();
   @ViewChild(MatPaginator) matPaginator!: MatPaginator;
   @ViewChild(MatSort) matSort!: MatSort;
+
+  filterString = '';
 
   constructor(private studentsService: StudentsService) {}
 
@@ -47,5 +50,9 @@ export class StudentsComponent implements OnInit {
         console.log(errorResponse);
       }
     );
+  }
+
+  filterStudents() {
+    this.dataSource.filter = this.filterString.trim().toLowerCase();
   }
 }

@@ -56,11 +56,13 @@ import { MatTableModule } from '@angular/material/table';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, StudentsComponent],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,

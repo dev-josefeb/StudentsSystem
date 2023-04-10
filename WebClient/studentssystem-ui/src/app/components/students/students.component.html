@@ -5,6 +5,18 @@
 </div>
 
 <div class="container">
+  <div class="row end-xs mt-1">
+    <div class="col-xs-12">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search Students"
+        [(ngModel)]="filterString"
+        (keyup)="filterStudents()"
+      />
+    </div>
+  </div>
+
   <div class="mt-1 mat-elevation-z8">
     <table mat-table matSort [dataSource]="dataSource">
       <!--- Note that these columns can be defined in any order.
