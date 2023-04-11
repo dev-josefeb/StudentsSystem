@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API.csproj", "{9F6F66D4-4580-4824-972C-F0D9CAB071AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API.csproj", "{9F6F66D4-4580-4824-972C-F0D9CAB071AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2BA5475B-DA56-41CD-A805-F58FA4C3B142}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requests", "Requests", "{E32F4A73-C8AE-4E22-9EB2-433B8D979E74}"
+	ProjectSection(SolutionItems) = preProject
+		requests.http = requests.http
 	EndProjectSection
 EndProject
 Global
@@ -23,6 +28,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E32F4A73-C8AE-4E22-9EB2-433B8D979E74} = {2BA5475B-DA56-41CD-A805-F58FA4C3B142}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {557DBCEE-A6B6-4FF2-A00C-1C21852B4810}

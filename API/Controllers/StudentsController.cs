@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Student = API.Domain_Models.Student;
 using AutoMapper;
+using API.Domain_Models;
+using API.DataModels;
 
 namespace API.Controllers
 {
@@ -37,6 +39,24 @@ namespace API.Controllers
             }
 
             return Ok(mapper.Map<Student>(student));
+        }
+
+        [HttpPut]
+        [Route("[controller]/{studentId:guid}")]
+        public async Task<IActionResult> UpdateStudentAsync([FromRoute] Guid studentId, [FromBody] UpdateStudentRequest request )
+        {
+            if (!await studentRepository.Exists(studentId))
+            {
+                return NotFound();
+            }
+
+            var updatedStudent =  await studentRepository.UpdateStudent(studentId, mapper.Map<DataModels.Student>(request));
+            if(updatedStudent is not null)
+            {
+                return Ok(mapper.Map<Student>(updatedStudent));
+            }
+
+            return NotFound();
         }
     }
 }

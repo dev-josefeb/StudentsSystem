@@ -1,0 +1,13 @@
+PUT https://localhost:7150/Students/83045206-9970-4d13-8def-008091160c88
+Content-Type: application/json
+
+{
+  "firstName": "Sentosa",
+  "lastName": "Valencia",
+  "dateOfBirth": "1990-06-11T00:00:00",
+  "email": "Sentosa.Valencia@gmail.com",
+  "mobile": "91254684862",
+  "genderId": "6f08fab6-c62e-4306-9d77-c82c9c6a23ac",
+  "physicalAddress": "123 Unknown Street",
+  "postalAddress": "235 Unknown Street"
+}
