@@ -27,5 +27,10 @@ namespace API.Repositories
               .Include(nameof(Address))
               .FirstOrDefaultAsync(s => s.Id == id);
         }
+
+        public async Task<List<Gender>> GetGendersAsync()
+        {
+            return await context.Gender.ToListAsync();
+        }
     }
 }
