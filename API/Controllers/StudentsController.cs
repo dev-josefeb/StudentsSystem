@@ -43,14 +43,14 @@ namespace API.Controllers
 
         [HttpPut]
         [Route("[controller]/{studentId:guid}")]
-        public async Task<IActionResult> UpdateStudentAsync([FromRoute] Guid studentId, [FromBody] UpdateStudentRequest request )
+        public async Task<IActionResult> UpdateStudent([FromRoute] Guid studentId, [FromBody] UpdateStudentRequest request )
         {
             if (!await studentRepository.Exists(studentId))
             {
                 return NotFound();
             }
 
-            var updatedStudent =  await studentRepository.UpdateStudent(studentId, mapper.Map<DataModels.Student>(request));
+            var updatedStudent =  await studentRepository.UpdateStudentAsync(studentId, mapper.Map<DataModels.Student>(request));
             if(updatedStudent is not null)
             {
                 return Ok(mapper.Map<Student>(updatedStudent));

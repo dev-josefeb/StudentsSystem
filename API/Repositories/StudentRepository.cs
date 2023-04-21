@@ -38,7 +38,7 @@ namespace API.Repositories
             return await context.Student.AnyAsync(s => s.Id == studentId);
         }
 
-        public async Task<Student> UpdateStudent(Guid studentId, Student request)
+        public async Task<Student> UpdateStudentAsync(Guid studentId, Student request)
         {
             var existingStudent = await GetStudentAsync(studentId);
             if (existingStudent == null)
