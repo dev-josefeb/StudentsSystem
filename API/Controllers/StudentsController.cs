@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Student = API.Domain_Models.Student;
 using AutoMapper;
 using API.Domain_Models;
-using API.DataModels;
 
 namespace API.Controllers
 {
@@ -28,7 +27,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Route("[controller]/{studentId:guid}")]
+        [Route("[controller]/{studentId:guid}"), ActionName("GetStudent")]
         public async Task<IActionResult> GetStudent([FromRoute] Guid studentId)
         {
             var student = await studentRepository.GetStudentAsync(studentId);
@@ -70,6 +69,17 @@ namespace API.Controllers
 
             var student = await studentRepository.DeleteStudentAsync(studentId);
             return Ok(mapper.Map<Student>(student));
+        }
+
+        [HttpPost]
+        [Route("[controller]/Add")]
+        public async Task<IActionResult> AddStudent([FromBody] AddStudentRequest request)
+        {
+            var student = await studentRepository.AddStudentAsync(mapper.Map<DataModels.Student>(request));
+            return CreatedAtAction(
+                nameof(GetStudent), 
+                new { studentId = student.Id },
+                mapper.Map<Student>(student));
         }
     }
 }
