@@ -1,5 +1,6 @@
 ﻿using API.DataModels;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices;
 
 namespace API.Repositories
 {
@@ -57,6 +58,20 @@ namespace API.Repositories
 
             await context.SaveChangesAsync();
             return existingStudent;
+        }
+
+        public async Task<Student> DeleteStudentAsync(Guid studentId)
+        {
+            var student = await GetStudentAsync(studentId);
+
+            if (student == null) 
+            { 
+                return null;
+            }
+    
+            context.Student.Remove(student);
+            await context.SaveChangesAsync();
+            return student;
         }
     }
 }
