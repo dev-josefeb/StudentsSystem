@@ -3,7 +3,7 @@ export interface AddStudentRequest {
   lastName: string;
   dateOfBirth: string;
   email: string;
-  mobile: number;
+  mobile: string;
   genderId: string;
   physicalAddress: string;
   postalAddress: string;
