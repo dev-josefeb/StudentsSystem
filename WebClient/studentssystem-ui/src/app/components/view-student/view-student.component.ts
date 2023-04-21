@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Gender } from 'src/app/models/ui-models/gender';
 import { Student } from 'src/app/models/ui-models/student';
 import { GendersService } from 'src/app/services/genders.service';
@@ -40,6 +40,7 @@ export class ViewStudentComponent implements OnInit {
     private readonly studentService: StudentsService,
     private readonly gendersService: GendersService,
     private snackbar: MatSnackBar,
+    private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
 
@@ -64,9 +65,36 @@ export class ViewStudentComponent implements OnInit {
   onUpdate(): void {
     this.studentService.updateStudent(this.student.id, this.student).subscribe(
       (successResponse) => {
-        this.snackbar.open('Student updated successfully', undefined, {
-          duration: 2000,
-        });
+        this.snackbar.open(
+          `Student '${successResponse.firstName} ${successResponse.lastName} updated successfully`,
+          undefined,
+          {
+            duration: 2000,
+          }
+        );
+      },
+      (errorResponse) => {
+        console.log(errorResponse);
+      }
+    );
+  }
+
+  onDelete(): void {
+    const notificationDelay = 2000;
+
+    this.studentService.deleteStudent(this.student.id).subscribe(
+      (successResponse) => {
+        this.snackbar.open(
+          `Student '${successResponse.firstName} ${successResponse.lastName}' deleted successfully`,
+          undefined,
+          {
+            duration: notificationDelay,
+          }
+        );
+
+        setTimeout(() => {
+          this.router.navigateByUrl('students');
+        }, notificationDelay);
       },
       (errorResponse) => {
         console.log(errorResponse);
