@@ -43,7 +43,7 @@ export class ViewStudentComponent implements OnInit {
     private readonly studentService: StudentsService,
     private readonly gendersService: GendersService,
     private snackbar: MatSnackBar,
-    private readonly router: Router,
+    private router: Router,
     private readonly route: ActivatedRoute
   ) {}
 
@@ -58,13 +58,13 @@ export class ViewStudentComponent implements OnInit {
         } else {
           this.isNewStudent = false;
           this.header = 'Edit Student';
-        }
 
-        this.studentService
-          .getStudent(this.studentId)
-          .subscribe((successResponse) => {
-            this.student = successResponse;
-          });
+          this.studentService
+            .getStudent(this.studentId)
+            .subscribe((successResponse) => {
+              this.student = successResponse;
+            });
+        }
       }
 
       this.gendersService.getGenders().subscribe((successResponse) => {
@@ -113,5 +113,26 @@ export class ViewStudentComponent implements OnInit {
     );
   }
 
-  onAdd(): void {}
+  onAdd(): void {
+    const notificationDelay = 2000;
+
+    this.studentService.addStudent(this.student).subscribe(
+      (successResponse) => {
+        this.snackbar.open(
+          `Student '${successResponse.firstName} ${successResponse.lastName}' added successfully`,
+          undefined,
+          {
+            duration: notificationDelay,
+          }
+        );
+
+        setTimeout(() => {
+          this.router.navigateByUrl(`students/${successResponse.id}`);
+        }, notificationDelay);
+      },
+      (errorResponse) => {
+        console.log(errorResponse);
+      }
+    );
+  }
 }
