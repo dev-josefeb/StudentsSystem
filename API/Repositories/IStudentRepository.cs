@@ -17,5 +17,7 @@ namespace API.Repositories
         Task<Student> DeleteStudentAsync(Guid studentId);
 
         Task<Student> AddStudentAsync(Student request);
+
+        Task<bool> UpdateProfileImageAsync(Guid studentId, string profileImageUrl);
     }
 }
