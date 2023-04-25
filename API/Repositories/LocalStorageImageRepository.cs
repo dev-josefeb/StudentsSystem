@@ -8,7 +8,7 @@
             using Stream fileStream = new FileStream(filePath, FileMode.Create);
             await file.CopyToAsync(fileStream);
 
-            return GetServerRelativePath(filePath);
+            return GetServerRelativePath(fileName);
         }
 
         private string GetServerRelativePath(string fileName)

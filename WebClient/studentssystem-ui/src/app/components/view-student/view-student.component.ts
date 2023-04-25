@@ -169,7 +169,9 @@ export class ViewStudentComponent implements OnInit {
             }
           );
         },
-        (errorResponse) => {}
+        (errorResponse) => {
+          console.log(errorResponse);
+        }
       );
     }
   }
