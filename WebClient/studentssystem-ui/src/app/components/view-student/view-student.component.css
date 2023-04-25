@@ -10,3 +10,19 @@
     padding: 1em;
     border-radius: 1em;
 }
+
+.image-container{
+    height: 200px;
+    width: 200px;
+    background-color: #F7F7F7;
+    border: 2px solid #CCC;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-container img{
+    width: 200px;
+}
