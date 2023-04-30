@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { Student } from '../models/api-models/student';
 import { UpdateStudentRequest } from '../models/api-models/update-student-request';
 import { AddStudentRequest } from '../models/api-models/add-student-request';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentsService {
-  private baseApiUrl = 'https://localhost:7150';
+  private baseApiUrl = environment.baseApiUrl;
 
   constructor(private httpClient: HttpClient) {}
 
