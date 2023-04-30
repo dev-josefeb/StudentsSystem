@@ -13,7 +13,7 @@ namespace API.Controllers
         private readonly IImageRepository imageRepository;
         private readonly IMapper mapper;
 
-        public StudentsController(IStudentRepository studentRepository, IImageRepository imageRepository,  IMapper mapper)
+        public StudentsController(IStudentRepository studentRepository, IImageRepository imageRepository, IMapper mapper)
         {
             this.studentRepository = studentRepository;
             this.imageRepository = imageRepository;
@@ -44,15 +44,15 @@ namespace API.Controllers
 
         [HttpPut]
         [Route("[controller]/{studentId:guid}")]
-        public async Task<IActionResult> UpdateStudent([FromRoute] Guid studentId, [FromBody] UpdateStudentRequest request )
+        public async Task<IActionResult> UpdateStudent([FromRoute] Guid studentId, [FromBody] UpdateStudentRequest request)
         {
             if (!await studentRepository.Exists(studentId))
             {
                 return NotFound();
             }
 
-            var updatedStudent =  await studentRepository.UpdateStudentAsync(studentId, mapper.Map<DataModels.Student>(request));
-            if(updatedStudent is not null)
+            var updatedStudent = await studentRepository.UpdateStudentAsync(studentId, mapper.Map<DataModels.Student>(request));
+            if (updatedStudent is not null)
             {
                 return Ok(mapper.Map<Student>(updatedStudent));
             }
@@ -79,7 +79,7 @@ namespace API.Controllers
         {
             var student = await studentRepository.AddStudentAsync(mapper.Map<DataModels.Student>(request));
             return CreatedAtAction(
-                nameof(GetStudent), 
+                nameof(GetStudent),
                 new { studentId = student.Id },
                 mapper.Map<Student>(student));
         }
@@ -88,6 +88,25 @@ namespace API.Controllers
         [Route("[controller]/{studentId:guid}/upload-image")]
         public async Task<IActionResult> UploadImage([FromRoute] Guid studentId, IFormFile profileImage)
         {
+            if (profileImage == null || profileImage.Length == 0)
+            {
+                return NotFound();
+            }
+
+            var validExtensions = new List<string>()
+            {
+                "jpg",
+                "jpeg",
+                "png",
+                "gif",
+            };
+
+            var extension = Path.GetExtension(profileImage.FileName);
+            if (!validExtensions.Contains(extension))
+            {
+                return BadRequest("This is not a supported image format");
+            }
+
             if (!await studentRepository.Exists(studentId))
             {
                 return NotFound();
@@ -96,7 +115,7 @@ namespace API.Controllers
             var fileName = Guid.NewGuid() + Path.GetExtension(profileImage.FileName);
             var fileImagePath = await imageRepository.Upload(profileImage, fileName);
 
-            if(await studentRepository.UpdateProfileImageAsync(studentId, fileImagePath))
+            if (await studentRepository.UpdateProfileImageAsync(studentId, fileImagePath))
             {
                 return Ok(fileImagePath);
             }
