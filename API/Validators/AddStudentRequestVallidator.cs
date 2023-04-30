@@ -22,10 +22,8 @@ namespace API.Validators
             })
             .WithMessage("Please select a valid gender");
 
-
             RuleFor(x => x.PhysicalAddress).NotEmpty();
             RuleFor(x => x.PostalAddress).NotEmpty();
-
         }
     }
 }
