@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Gender } from 'src/app/models/ui-models/gender';
@@ -40,6 +41,8 @@ export class ViewStudentComponent implements OnInit {
 
   genders: Gender[] = [];
 
+  @ViewChild('studentDetailsForm') studentDetailsForm?: NgForm;
+
   constructor(
     private readonly studentService: StudentsService,
     private readonly gendersService: GendersService,
@@ -80,6 +83,8 @@ export class ViewStudentComponent implements OnInit {
   }
 
   onUpdate(): void {
+    if (!this.studentDetailsForm?.form.valid) return;
+
     this.studentService.updateStudent(this.student.id, this.student).subscribe(
       (successResponse) => {
         this.snackbar.open(
@@ -121,6 +126,8 @@ export class ViewStudentComponent implements OnInit {
 
   onAdd(): void {
     const notificationDelay = 2000;
+
+    if (!this.studentDetailsForm?.form.valid) return;
 
     this.studentService.addStudent(this.student).subscribe(
       (successResponse) => {
