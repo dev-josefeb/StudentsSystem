@@ -95,10 +95,10 @@ namespace API.Controllers
 
             var validExtensions = new List<string>()
             {
-                "jpg",
-                "jpeg",
-                "png",
-                "gif",
+                ".jpg",
+                ".jpeg",
+                ".png",
+                ".gif",
             };
 
             var extension = Path.GetExtension(profileImage.FileName);
