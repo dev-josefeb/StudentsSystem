@@ -1,5 +1,6 @@
 using API.DataModels;
 using API.Repositories;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 
@@ -19,6 +20,8 @@ builder.Services.AddCors((options) =>
 });
 
 builder.Services.AddControllers();
+
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
 
 builder.Services.AddDbContext<StudentAdminContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("StudentAdminPortalDb")));
